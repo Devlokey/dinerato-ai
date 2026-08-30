@@ -94,7 +94,7 @@ export default function HeroSection({ onOpenDemo }) {
                 onClick={onOpenDemo}
                 className="group inline-flex items-center space-x-3 px-7 py-3.5 rounded-full text-base font-medium text-white bg-[#141412] hover:bg-[#22211E] active:scale-[0.98] transition-all shadow-md hover:shadow-xl cursor-pointer"
               >
-                <span>Get a demo</span>
+                <span>Join the waitlist</span>
                 <div className="w-6 h-6 rounded-full bg-white/15 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
                   <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                 </div>

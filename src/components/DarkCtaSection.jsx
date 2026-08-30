@@ -42,7 +42,7 @@ export default function DarkCtaSection({ onOpenDemo }) {
               onClick={onOpenDemo}
               className="group inline-flex items-center space-x-3 px-8 py-4 rounded-full text-base font-semibold text-[#141412] bg-white hover:bg-[#FAF9F5] active:scale-[0.98] transition-all shadow-xl hover:shadow-2xl cursor-pointer"
             >
-              <span>Get a demo</span>
+              <span>Join the waitlist</span>
               <div className="w-6 h-6 rounded-full bg-[#141412]/10 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
                 <ArrowUpRight className="w-3.5 h-3.5 text-[#141412]" />
               </div>

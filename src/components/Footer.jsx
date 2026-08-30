@@ -25,8 +25,8 @@ export default function Footer({ onOpenDemo }) {
                 <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
               </li>
               <li>
-                <button onClick={onOpenDemo} className="hover:text-white transition-colors text-left">
-                  Get a demo
+                <button onClick={onOpenDemo} className="hover:text-white transition-colors text-left cursor-pointer">
+                  Join the waitlist
                 </button>
               </li>
             </ul>

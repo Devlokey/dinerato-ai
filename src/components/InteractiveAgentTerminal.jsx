@@ -122,12 +122,12 @@ export default function InteractiveAgentTerminal({ onOpenDemo }) {
 
             <div className="p-4 rounded-2xl bg-white/70 border border-[#E8E5DC] mt-4 text-xs text-[#524F47]">
               <div className="font-semibold text-[#141412] mb-1">Want to test with your own ERP data?</div>
-              <p>Book a 15-minute tailored demo to see Dinerato running against your actual historical catalogs and order emails.</p>
+              <p>Join the waitlist to test Dinerato running against your actual historical catalogs and order emails.</p>
               <button 
                 onClick={onOpenDemo}
-                className="mt-3 text-xs font-semibold text-[#141412] hover:underline flex items-center space-x-1"
+                className="mt-3 text-xs font-semibold text-[#141412] hover:underline flex items-center space-x-1 cursor-pointer"
               >
-                <span>Request custom sandbox</span>
+                <span>Join the waitlist</span>
                 <ArrowRight className="w-3 h-3" />
               </button>
             </div>

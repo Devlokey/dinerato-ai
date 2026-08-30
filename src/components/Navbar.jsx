@@ -226,7 +226,7 @@ export default function Navbar({ onOpenDemo }) {
               onClick={onOpenDemo}
               className="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-medium text-white bg-[#141412] hover:bg-[#22211E] active:scale-[0.98] transition-all shadow-xs hover:shadow-md cursor-pointer"
             >
-              <span>Get a demo</span>
+              <span>Join the waitlist</span>
             </button>
           </div>
 
@@ -284,7 +284,7 @@ export default function Navbar({ onOpenDemo }) {
               }}
               className="w-full flex items-center justify-center space-x-2 px-5 py-3 rounded-full text-sm font-medium text-white bg-[#141412] hover:bg-[#22211E] transition-colors"
             >
-              <span>Get a demo</span>
+              <span>Join the waitlist</span>
               <ArrowUpRight className="w-4 h-4" />
             </button>
           </motion.div>

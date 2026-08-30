@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import DineratoLogo from './DineratoLogo'
 
 export default function DemoModal({ isOpen, onClose }) {
-  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +23,6 @@ export default function DemoModal({ isOpen, onClose }) {
     onClose()
     setTimeout(() => {
       setSubmitted(false)
-      setStep(1)
     }, 300)
   }
 
@@ -40,7 +38,7 @@ export default function DemoModal({ isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"
         />
 
         {/* Modal Window */}
@@ -54,7 +52,7 @@ export default function DemoModal({ isOpen, onClose }) {
           {/* Close button */}
           <button
             onClick={handleClose}
-            className="absolute top-5 right-5 p-2 rounded-full text-[#757266] hover:text-[#141412] hover:bg-[#E8E5DC] transition-colors"
+            className="absolute top-5 right-5 p-2 rounded-full text-[#757266] hover:text-[#141412] hover:bg-[#E8E5DC] transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -64,15 +62,15 @@ export default function DemoModal({ isOpen, onClose }) {
               <div>
                 <div className="flex items-center space-x-3 mb-4">
                   <DineratoLogo color="black" className="h-6" />
-                  <span className="text-[11px] text-[#757266] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#E8E5DC]/60">• Private Demo</span>
+                  <span className="text-[11px] text-[#757266] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#E8E5DC]/60">• Early Access</span>
                 </div>
 
                 <h3 className="font-serif text-3xl font-normal text-[#141412] tracking-tight">
-                  See Dinerato in action with your distributor workflows
+                  Join the waitlist for Dinerato AI
                 </h3>
 
                 <p className="text-sm text-[#524F47] mt-2 mb-6">
-                  Schedule a personalized 15-minute walkthrough of our autonomous agents with our supply chain specialists.
+                  Get priority onboarding and early access to autonomous distribution agents for your supply chain operations.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -155,15 +153,15 @@ export default function DemoModal({ isOpen, onClose }) {
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-full text-base font-semibold text-white bg-[#141412] hover:bg-[#22211E] active:scale-[0.98] transition-all shadow-md"
+                      className="w-full flex items-center justify-center space-x-2 py-3.5 rounded-full text-base font-semibold text-white bg-[#141412] hover:bg-[#22211E] active:scale-[0.98] transition-all shadow-md cursor-pointer"
                     >
-                      <span>Confirm & Schedule Demo</span>
+                      <span>Join the Waitlist</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
 
                   <p className="text-center text-[11px] text-[#757266]">
-                    No obligation • 15-minute live walkthrough • SOC2 Type II Certified
+                    Instant confirmation • Priority onboarding batch • SOC2 Type II Certified
                   </p>
                 </form>
               </div>
@@ -178,15 +176,15 @@ export default function DemoModal({ isOpen, onClose }) {
                 </motion.div>
 
                 <h3 className="font-serif text-3xl font-normal text-[#141412]">
-                  Demo Request Received!
+                  You're on the Waitlist!
                 </h3>
                 <p className="text-sm text-[#524F47] mt-2 mb-6 max-w-sm mx-auto">
-                  Thank you, <span className="font-semibold text-[#141412]">{formData.name}</span>. A distribution AI specialist will contact you at <span className="font-semibold text-[#141412]">{formData.email}</span> within 2 hours.
+                  Thank you, <span className="font-semibold text-[#141412]">{formData.name}</span>. We've reserved your priority spot and will notify you at <span className="font-semibold text-[#141412]">{formData.email}</span> as soon as your batch is unlocked.
                 </p>
 
                 <button
                   onClick={handleClose}
-                  className="px-6 py-2.5 rounded-full bg-[#141412] text-white text-sm font-semibold hover:bg-[#22211E] transition-colors"
+                  className="px-6 py-2.5 rounded-full bg-[#141412] text-white text-sm font-semibold hover:bg-[#22211E] transition-colors cursor-pointer"
                 >
                   Return to Website
                 </button>
