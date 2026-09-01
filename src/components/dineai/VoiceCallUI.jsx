@@ -124,16 +124,39 @@ export const VoiceCallUI = ({
             overdueDays: 5
           },
           onCallStart: () => {
-            if (isMounted) { setVapiConnecting(false); setVapiConnected(true); }
+            if (isMounted) {
+              setVapiConnecting(false);
+              setVapiConnected(true);
+            }
           },
           onCallEnd: () => {
-            if (isMounted) { setVapiConnecting(false); setVapiConnected(false); setIsCompleted(true); }
+            if (isMounted) {
+              stopVapiCall();
+              setVapiConnecting(false);
+              setVapiConnected(false);
+              setVapiSpeakingRole('idle');
+              setLiveVolume(0);
+              setIsCompleted(true);
+            }
           },
           onSpeechStart: () => { if (isMounted) setVapiSpeakingRole('ai'); },
           onSpeechEnd: () => { if (isMounted) setVapiSpeakingRole('idle'); },
           onVolumeLevel: (level) => { if (isMounted) setLiveVolume(level); },
           onMessage: (message) => {
             if (!isMounted) return;
+            if (
+              message?.type === 'end-of-call-report' ||
+              message?.type === 'call-ended' ||
+              (message?.type === 'status-update' && message?.status === 'ended')
+            ) {
+              stopVapiCall();
+              setVapiConnecting(false);
+              setVapiConnected(false);
+              setVapiSpeakingRole('idle');
+              setLiveVolume(0);
+              setIsCompleted(true);
+              return;
+            }
             if (message?.type === 'transcript' && message.transcript) {
               const speaker = message.role === 'assistant' ? 'DINE AI' : 'YOU';
               const isAI = message.role === 'assistant';
@@ -156,23 +179,32 @@ export const VoiceCallUI = ({
           },
           onError: (err) => {
             if (isMounted) {
+              stopVapiCall();
               setVapiConnecting(false);
               setVapiConnected(false);
+              setVapiSpeakingRole('idle');
+              setLiveVolume(0);
               setVapiError(err?.message || 'Failed to connect to Vapi');
             }
           }
         });
       } catch (err) {
         if (isMounted) {
+          stopVapiCall();
           setVapiConnecting(false);
           setVapiConnected(false);
+          setVapiSpeakingRole('idle');
+          setLiveVolume(0);
           setVapiError(err?.message || 'Vapi initialization failed');
         }
       }
     };
 
     initVapi();
-    return () => { isMounted = false; stopVapiCall(); };
+    return () => {
+      isMounted = false;
+      stopVapiCall();
+    };
   }, [callMode, retryTrigger]);
 
   // Typewriter for simulation mode
@@ -200,12 +232,28 @@ export const VoiceCallUI = ({
   }, [currentLineIndex, typedChars, isCompleted, isFastForward, callMode]);
 
   const handleEndCall = () => {
-    if (callMode === 'vapi') stopVapiCall();
-    setCurrentLineIndex(DEFAULT_DIALOGUE_LINES.length - 1);
-    setTypedChars(DEFAULT_DIALOGUE_LINES[DEFAULT_DIALOGUE_LINES.length - 1].text.length);
-    setSeconds(prev => Math.max(prev, 42));
+    stopVapiCall();
+    setVapiConnecting(false);
+    setVapiConnected(false);
+    setVapiSpeakingRole('idle');
+    setLiveVolume(0);
+    if (callMode === 'simulation') {
+      setCurrentLineIndex(DEFAULT_DIALOGUE_LINES.length - 1);
+      setTypedChars(DEFAULT_DIALOGUE_LINES[DEFAULT_DIALOGUE_LINES.length - 1].text.length);
+      setSeconds(prev => Math.max(prev, 42));
+    }
     setIsCompleted(true);
   };
+
+  const handleClose = () => {
+    stopVapiCall();
+    setVapiConnecting(false);
+    setVapiConnected(false);
+    setVapiSpeakingRole('idle');
+    setLiveVolume(0);
+    onClose();
+  };
+
 
   const handleToggleMute = () => {
     const next = !isMuted;
@@ -299,7 +347,15 @@ export const VoiceCallUI = ({
               <div className="text-[10px] text-burnt-400 uppercase tracking-wider font-sans">Duration</div>
               <div className="text-sm font-bold text-emerald-400">{formatTimer(seconds)}</div>
             </div>
+            <button
+              onClick={handleClose}
+              className="p-2 rounded-lg bg-burnt-800 hover:bg-red-900/60 text-burnt-400 hover:text-red-300 border border-burnt-700 hover:border-red-700/60 transition-colors"
+              title="Close / Disconnect Call"
+            >
+              <X className="w-4 h-4" />
+            </button>
           </div>
+
         </div>
 
         {/* Call Metadata */}
@@ -496,25 +552,34 @@ export const VoiceCallUI = ({
             )}
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             {isCompleted ? (
-              <button
-                onClick={handleFinish}
-                className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-lg shadow-emerald-900/30 flex items-center space-x-2 transition-all active:scale-95"
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Proceed to Post-Call Analysis & Approval</span>
-              </button>
+              <>
+                <button
+                  onClick={handleClose}
+                  className="px-3 py-2 bg-burnt-800 hover:bg-burnt-700 text-burnt-300 hover:text-white text-xs font-medium rounded-lg border border-burnt-700 transition-colors"
+                >
+                  Dismiss
+                </button>
+                <button
+                  onClick={handleFinish}
+                  className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg shadow-lg shadow-emerald-900/30 flex items-center space-x-2 transition-all active:scale-95"
+                >
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Proceed to Post-Call Analysis & Approval</span>
+                </button>
+              </>
             ) : (
               <button
                 onClick={handleEndCall}
-                className="px-4 py-2.5 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg shadow-lg shadow-red-900/30 flex items-center space-x-2 transition-all"
+                className="px-4 py-2.5 bg-red-600 hover:bg-red-500 text-white text-xs font-semibold rounded-lg shadow-lg shadow-red-900/30 flex items-center space-x-2 transition-all active:scale-95"
               >
                 <PhoneOff className="w-4 h-4" />
                 <span>End Call ({formatTimer(seconds)})</span>
               </button>
             )}
           </div>
+
         </div>
       </div>
 

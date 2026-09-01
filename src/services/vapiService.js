@@ -288,8 +288,17 @@ export const startVapiCall = async ({
   });
 
   vapiInstance.on('message', (message) => {
+    if (
+      message?.type === 'end-of-call-report' ||
+      message?.type === 'call-ended' ||
+      (message?.type === 'status-update' && message?.status === 'ended')
+    ) {
+      activeCallSession = null;
+      onCallEnd();
+    }
     onMessage(message);
   });
+
 
   vapiInstance.on('error', (err) => {
     console.error('Vapi WebRTC Event Error:', err);
@@ -464,14 +473,22 @@ export const fetchVapiCallDetails = async (callId) => {
 export const stopVapiCall = () => {
   if (vapiInstance) {
     try {
-      vapiInstance.stop();
+      if (typeof vapiInstance.stop === 'function') {
+        vapiInstance.stop();
+      }
     } catch (e) {
       console.warn('Error stopping Vapi call:', e);
     }
+    try {
+      if (typeof vapiInstance.removeAllListeners === 'function') {
+        vapiInstance.removeAllListeners();
+      }
+    } catch (_) {}
     vapiInstance = null;
   }
   activeCallSession = null;
 };
+
 
 /**
  * Toggles or sets microphone mute state
