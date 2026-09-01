@@ -25,9 +25,9 @@ export const isGeminiConfigured = () => {
  */
 export const getGeminiStatus = () => {
   if (isGeminiConfigured()) {
-    return '● Gemini 2.0 Connected';
+    return '● AI Online';
   }
-  return '● API Key Missing (Demo Intelligence)';
+  return '● Heuristic Engine (Local)';
 };
 
 /**
@@ -370,7 +370,7 @@ Extract structured procurement insights and output strictly valid JSON with this
         const parsed = JSON.parse(jsonMatch[0]);
         return {
           ...parsed,
-          analyzedVia: 'Gemini 2.0 Flash'
+          analyzedVia: 'AI Intelligence'
         };
       }
     } catch (err) {

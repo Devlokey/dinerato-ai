@@ -315,7 +315,7 @@ function WorkflowCompleteCard({ text, data = {} }) {
               Conversation Analysis
             </span>
             <span className="text-[9px] text-stone-400">
-              {analysis?.analyzedVia || 'Gemini 2.0 Flash'}
+              {analysis?.analyzedVia ? (analysis.analyzedVia.includes('Gemini') ? 'AI Intelligence' : analysis.analyzedVia) : 'AI Intelligence'}
             </span>
           </div>
 
@@ -592,7 +592,7 @@ export default function DineAIPanel({ isOpen, onClose }) {
                 <span className="text-base font-bold text-white tracking-wide">DINE AI</span>
                 <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  {isGeminiConfigured() ? 'Gemini 2.0 Live' : 'AI Online'}
+                  Live
                 </span>
               </div>
             </div>

@@ -40,11 +40,11 @@ export const SystemStatusFooter = () => {
           <span className="text-stone-500">● 7 Active</span>
         </div>
 
-        {/* Gemini AI Status */}
+        {/* AI Intelligence Engine */}
         <div className="flex items-center gap-1.5 w-full pt-1 border-t border-stone-900 justify-between text-[9px]">
           <span className="text-stone-500">AI Intelligence Engine:</span>
           <span className={geminiOnline ? 'text-emerald-400' : 'text-amber-400'}>
-            {geminiOnline ? '● Gemini 2.0 Flash (Online)' : '● Heuristic Engine (Local)'}
+            {geminiOnline ? '● Neural Engine (Online)' : '● Heuristic Engine (Local)'}
           </span>
         </div>
       </div>
