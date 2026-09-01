@@ -1,0 +1,23 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Agent",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "field:agent_id",
+  "fields": [
+    { "fieldname": "agent_id", "label": "Agent ID", "fieldtype": "Data", "reqd": 1, "unique": 1 },
+    { "fieldname": "agent_name", "label": "Agent Name", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "role_title", "label": "Role Title", "fieldtype": "Data" },
+    { "fieldname": "status", "label": "Status", "fieldtype": "Select", "options": "Active\nPaused\nDisabled", "default": "Active" },
+    { "fieldname": "can_read_data", "label": "Can Read Data", "fieldtype": "Check", "default": 1 },
+    { "fieldname": "can_write_data", "label": "Can Write Data", "fieldtype": "Check", "default": 0 },
+    { "fieldname": "can_send_emails", "label": "Can Send Emails", "fieldtype": "Check", "default": 0 },
+    { "fieldname": "can_make_calls", "label": "Can Make Calls", "fieldtype": "Check", "default": 0 },
+    { "fieldname": "can_approve_purchases", "label": "Can Approve Purchases", "fieldtype": "Check", "default": 0 },
+    { "fieldname": "can_create_pos", "label": "Can Create POs", "fieldtype": "Check", "default": 0 },
+    { "fieldname": "tasks_completed", "label": "Tasks Completed", "fieldtype": "Int", "default": 0 }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 1 }
+  ]
+}

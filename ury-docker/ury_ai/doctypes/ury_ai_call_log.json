@@ -1,0 +1,23 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Call Log",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "format:CALL-{YYYY}-{#####}",
+  "fields": [
+    { "fieldname": "timestamp", "label": "Call Timestamp", "fieldtype": "Datetime", "reqd": 1 },
+    { "fieldname": "po_reference", "label": "Purchase Order", "fieldtype": "Link", "options": "Purchase Order", "reqd": 1 },
+    { "fieldname": "supplier", "label": "Supplier", "fieldtype": "Link", "options": "Supplier" },
+    { "fieldname": "contact_person", "label": "Contact Person", "fieldtype": "Data" },
+    { "fieldname": "phone_number", "label": "Phone Number", "fieldtype": "Data" },
+    { "fieldname": "duration_seconds", "label": "Duration (Seconds)", "fieldtype": "Int", "default": 42 },
+    { "fieldname": "dialogue_transcript", "label": "Dialogue Transcript (JSON)", "fieldtype": "Code", "options": "JSON" },
+    { "fieldname": "extracted_commitment_date", "label": "Extracted Delivery Date", "fieldtype": "Date" },
+    { "fieldname": "extracted_delay_reason", "label": "Extracted Delay Reason", "fieldtype": "Data" },
+    { "fieldname": "confidence_score", "label": "Confidence Score (%)", "fieldtype": "Percent", "default": 94.0 },
+    { "fieldname": "call_status", "label": "Call Status", "fieldtype": "Select", "options": "Completed\nBusy\nNo Answer\nFailed", "default": "Completed" }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 0 }
+  ]
+}

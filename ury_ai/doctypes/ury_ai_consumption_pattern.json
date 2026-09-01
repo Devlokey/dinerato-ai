@@ -1,0 +1,19 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Consumption Pattern",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "format:CSP-{YYYY}-{#####}",
+  "fields": [
+    { "fieldname": "item_code", "label": "Item Code", "fieldtype": "Link", "options": "Item", "reqd": 1 },
+    { "fieldname": "warehouse", "label": "Warehouse", "fieldtype": "Link", "options": "Warehouse", "reqd": 1 },
+    { "fieldname": "daily_consumption_avg", "label": "Daily Average Consumption", "fieldtype": "Float", "default": 0.0 },
+    { "fieldname": "safety_stock_level", "label": "Safety Stock Level", "fieldtype": "Float", "default": 0.0 },
+    { "fieldname": "projected_runout_days", "label": "Projected Days to Runout", "fieldtype": "Float", "default": 0.0 },
+    { "fieldname": "risk_status", "label": "Risk Status", "fieldtype": "Select", "options": "LOW\nMEDIUM\nHIGH\nCRITICAL", "default": "LOW" },
+    { "fieldname": "last_calculated", "label": "Last Calculation Timestamp", "fieldtype": "Datetime" }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 0 }
+  ]
+}

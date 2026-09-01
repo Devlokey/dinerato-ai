@@ -1,0 +1,18 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Supplier Score",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "format:SCORE-{YYYY}-{#####}",
+  "fields": [
+    { "fieldname": "supplier", "label": "Supplier", "fieldtype": "Link", "options": "Supplier", "reqd": 1 },
+    { "fieldname": "rating", "label": "Rating", "fieldtype": "Float", "default": 4.5 },
+    { "fieldname": "on_time_rate", "label": "On-Time Rate (%)", "fieldtype": "Percent", "default": 95.0 },
+    { "fieldname": "reliability_score", "label": "Reliability Score", "fieldtype": "Float", "default": 95.0 },
+    { "fieldname": "active_pos", "label": "Active PO Count", "fieldtype": "Int", "default": 0 },
+    { "fieldname": "last_updated", "label": "Last Updated", "fieldtype": "Datetime" }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 0 }
+  ]
+}

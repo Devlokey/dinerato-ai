@@ -1,0 +1,29 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Audit Log",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "format:AUD-{YYYY}-{#####}",
+  "is_submittable": 0,
+  "read_only": 1,
+  "fields": [
+    { "fieldname": "audit_id", "label": "Audit ID", "fieldtype": "Data", "reqd": 1, "unique": 1 },
+    { "fieldname": "timestamp", "label": "Timestamp (UTC)", "fieldtype": "Datetime", "reqd": 1 },
+    { "fieldname": "agent_id", "label": "Agent ID", "fieldtype": "Link", "options": "URY AI Agent", "reqd": 1 },
+    { "fieldname": "agent_name", "label": "Agent Name", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "action", "label": "Action", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "object_type", "label": "Target Object Type", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "object_id", "label": "Target Object ID", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "method", "label": "Execution Method", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "status", "label": "Status", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "approved_by", "label": "Approved By", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "payload_summary", "label": "Payload JSON", "fieldtype": "Code", "options": "JSON" },
+    { "fieldname": "prev_hash", "label": "Previous Block Hash (SHA-256)", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "curr_hash", "label": "Current Block Hash (SHA-256)", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "nonce", "label": "Cryptographic Nonce", "fieldtype": "Data", "default": "0001" }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 0, "create": 1, "delete": 0 },
+    { "role": "Auditor", "read": 1, "write": 0, "create": 0, "delete": 0 }
+  ]
+}

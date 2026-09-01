@@ -1,0 +1,23 @@
+{
+  "doctype": "DocType",
+  "name": "URY AI Recommendation",
+  "module": "URY AI",
+  "custom": 1,
+  "autoname": "format:REC-{YYYY}-{#####}",
+  "fields": [
+    { "fieldname": "recommendation_type", "label": "Recommendation Type", "fieldtype": "Select", "options": "PO_DELIVERY_UPDATE\nPO_CREATION\nSUPPLIER_SELECTION", "reqd": 1 },
+    { "fieldname": "reference_doctype", "label": "Reference DocType", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "reference_name", "label": "Reference Name", "fieldtype": "Data", "reqd": 1 },
+    { "fieldname": "monetary_value", "label": "Monetary Value (INR)", "fieldtype": "Currency" },
+    { "fieldname": "threshold_limit", "label": "Threshold Limit (INR)", "fieldtype": "Currency", "default": 100000.0 },
+    { "fieldname": "proposed_change_json", "label": "Proposed Change Payload", "fieldtype": "Code", "options": "JSON" },
+    { "fieldname": "status", "label": "Status", "fieldtype": "Select", "options": "Pending Review\nApproved\nRejected", "default": "Pending Review" },
+    { "fieldname": "reviewed_by", "label": "Reviewed By", "fieldtype": "Link", "options": "User" },
+    { "fieldname": "review_timestamp", "label": "Review Timestamp", "fieldtype": "Datetime" },
+    { "fieldname": "review_comments", "label": "Review Comments", "fieldtype": "Small Text" }
+  ],
+  "permissions": [
+    { "role": "System Manager", "read": 1, "write": 1, "create": 1, "delete": 0 },
+    { "role": "Purchase Manager", "read": 1, "write": 1, "create": 1, "delete": 0 }
+  ]
+}
